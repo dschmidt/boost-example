@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 
     boost::asio::io_service io_service;
 
-    new HttpClient(io_service, server, path);
+    HttpClient client(io_service, server, path);
 
     io_service.run();
   }
