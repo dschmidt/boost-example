@@ -11,9 +11,10 @@
 #include <ostream>
 #include <string>
 
-HttpClient::HttpClient(boost::asio::io_service& io_service, const std::string& server, const std::string& path)
+HttpClient::HttpClient(boost::asio::io_service& io_service, const std::string& server, const std::string& path, ReadContentCallback callback)
     :   resolver_(io_service)
     ,   socket_(io_service)
+    ,   readContentCallback_(callback)
 {
     std::ostream request_stream(&request_);
     request_stream << "GET " << path << " HTTP/1.0\r\n";
@@ -33,7 +34,9 @@ void HttpClient::handleReadContent(const boost::system::error_code& err)
   if (!err)
   {
     // Write all of the data that has been read so far.
-    std::cout << &response_;
+    if(readContentCallback_) {
+        readContentCallback_(response_);
+    }
 
     // Continue reading remaining data until EOF.
     boost::asio::async_read(socket_, response_,

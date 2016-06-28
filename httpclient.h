@@ -4,11 +4,12 @@
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/streambuf.hpp>
 
+typedef void (*ReadContentCallback)(boost::asio::streambuf& response);
 
 class HttpClient
 {
 public:
-    HttpClient(boost::asio::io_service& io_service, const std::string& server, const std::string& path);
+    HttpClient(boost::asio::io_service& io_service, const std::string& server, const std::string& path, ReadContentCallback);
 
 private:
     void handleReadContent(const boost::system::error_code& err);
@@ -21,6 +22,8 @@ private:
     boost::asio::ip::tcp::socket socket_;
     boost::asio::streambuf request_;
     boost::asio::streambuf response_;
+
+    ReadContentCallback readContentCallback_;
 };
 
 #endif // HTTPCLIENT_H

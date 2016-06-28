@@ -22,7 +22,9 @@ int main(int argc, char* argv[])
 
     boost::asio::io_service io_service;
 
-    HttpClient client(io_service, server, path);
+    HttpClient client(io_service, server, path, [](boost::asio::streambuf& response) {
+        std::cout << &response;
+    });
 
     io_service.run();
   }
