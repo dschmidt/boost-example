@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     {
       std::cout << "Usage: boost-example <server> <path>\n";
       std::cout << "Example:\n";
-      std::cout << "  async_client www.boost.org /LICENSE_1_0.txt\n";
+      std::cout << "  boost-example www.boost.org /LICENSE_1_0.txt\n";
       return 1;
     }
 
