@@ -2,9 +2,9 @@
 
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/write.hpp>
-
-//WIP
-#include <boost/asio.hpp>
+#include <boost/asio/read_until.hpp>
+#include <boost/asio/read.hpp>
+#include <boost/asio/connect.hpp>
 
 #include <iostream>
 #include <istream>
